@@ -1,0 +1,23 @@
+name: release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "The version to deploy"
+        required: true
+        type: string
+
+jobs:
+  create-release:
+    name: "Create Release"
+    runs-on: windows-latest
+    steps:
+      - uses: vedantmgoyal9/winget-releaser@19e706d4c9121098010096f9c495a70a7518b30f
+        with:
+          identifier: Clement.bottom
+          installers-regex: '^bottom_x86_64_installer\.msi$'
+          version: ${{ github.event.inputs.version }}
+          release-tag: ${{ github.event.inputs.version }}
+          token: ${{ secrets.WINGET_TOKEN }}
+          release-repository: "bottom"
