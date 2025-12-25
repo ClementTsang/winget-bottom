@@ -13,7 +13,7 @@ jobs:
     name: "Create Release"
     runs-on: windows-latest
     steps:
-      - uses: ClementTsang/winget-releaser@4a9c91725f4396c9d3491316c77621dc0d1a259e
+      - uses: ClementTsang/winget-releaser@87999d06e7cc62c10808c914c9d456e7c15b5c7b
         with:
           identifier: Clement.bottom
           installers-regex: '^bottom_x86_64_installer\.msi$'
