@@ -16,7 +16,7 @@ jobs:
       - uses: ClementTsang/winget-releaser@e1d9e728dae067da65723f9ca7f20a4495a69c83
         with:
           identifier: Clement.bottom
-          installers-regex: '^bottom_.+_installer\.msi$'
+          installers-regex: '^bottom_.+_installer\.msi$' # Should catch both x86 and ARM
           version: ${{ github.event.inputs.version }}
           release-tag: ${{ github.event.inputs.version }}
           token: ${{ secrets.WINGET_TOKEN }}
