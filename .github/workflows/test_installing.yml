@@ -41,7 +41,7 @@ jobs:
           cat "Clement.bottom.installer.yaml"
           winget validate --manifest .
           winget settings --enable LocalManifestFiles
-          winget install --manifest . --accept-source-agreements --accept-package-agreements
+          winget install --manifest . --accept-source-agreements --accept-package-agreements --silent
 
       - name: Verify installation
         shell: powershell
