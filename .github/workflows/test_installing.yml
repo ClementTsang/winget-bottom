@@ -40,6 +40,7 @@ jobs:
           cd "${{ github.event.inputs.manifest-path }}"
           cat "Clement.bottom.installer.yaml"
           winget validate --manifest .
+          winget settings --enable LocalManifestFiles
           winget install --manifest . --accept-source-agreements --accept-package-agreements
 
       - name: Verify installation
