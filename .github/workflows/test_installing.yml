@@ -2,39 +2,40 @@
 
 name: "Test Installing"
 on:
-    workflow_dispatch:
-        inputs:
-            manifest-path:
-                description: "Path to the manifest file to test install"
-                required: true
-                type: string
+  workflow_dispatch:
+    inputs:
+      manifest-path:
+        description: "Path to the manifest file to test install"
+        required: true
+        type: string
 
-            branch:
-                description: "Branch to use for testing (default: main)"
-                required: false
-                default: "main"
-                type: string
+      branch:
+        description: "Branch to use for testing (default: main)"
+        required: false
+        default: "main"
+        type: string
 
 jobs:
-    test-install:
-        name: "Test Install Manifest"
-        strategy:
-            matrix:
-                os: [windows-latest, windows-11-arm]
-        runs-on: ${{ matrix.os }}
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-              with:
-                  repository: "ClementTsang/winget-pkgs"
-                  ref: ${{ github.event.inputs.branch }}
+  test-install:
+    name: "Test Install Manifest"
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, windows-11-arm]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          repository: "ClementTsang/winget-pkgs"
+          ref: ${{ github.event.inputs.branch }}
 
-            - name: Install manifest
-              shell: powershell
-              run: |
-                  winget install --manifest ${{ github.event.inputs.manifest-path }} --accept-source-agreements --accept-package-agreements
+      - name: Install manifest
+        shell: powershell
+        run: |
+          winget install --manifest ${{ github.event.inputs.manifest-path }} --accept-source-agreements --accept-package-agreements
 
-            - name: Verify installation
-              shell: powershell
-              run: |
-                  btm -V
+      - name: Verify installation
+        shell: powershell
+        run: |
+          btm -V
