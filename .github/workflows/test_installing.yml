@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       manifest-path:
-        description: "Path to the manifest file to test install"
+        description: "Path to the manifest directory to test install"
         required: true
         type: string
 
@@ -33,12 +33,14 @@ jobs:
             ${{ github.event.inputs.manifest-path }}
           sparse-checkout-cone-mode: false
 
+      # Apparently needs to be run in the same folder where the manifest is (https://github.com/microsoft/winget-cli/discussions/991)?
       - name: Install manifest
         shell: powershell
         run: |
-          cat "${{ github.event.inputs.manifest-path }}"
-          winget validate --manifest "${{ github.event.inputs.manifest-path }}"
-          winget install --manifest "${{ github.event.inputs.manifest-path }}" --accept-source-agreements --accept-package-agreements
+          cd "${{ github.event.inputs.manifest-path }}"
+          cat "Clement.bottom.installer.yaml"
+          winget validate --manifest .
+          winget install --manifest . --accept-source-agreements --accept-package-agreements
 
       - name: Verify installation
         shell: powershell
