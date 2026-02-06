@@ -36,6 +36,7 @@ jobs:
       - name: Install manifest
         shell: powershell
         run: |
+          cat "${{ github.event.inputs.manifest-path }}"
           winget validate --manifest "${{ github.event.inputs.manifest-path }}"
           winget install --manifest "${{ github.event.inputs.manifest-path }}" --accept-source-agreements --accept-package-agreements
 
