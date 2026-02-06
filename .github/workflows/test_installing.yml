@@ -29,11 +29,15 @@ jobs:
         with:
           repository: "ClementTsang/winget-pkgs"
           ref: ${{ github.event.inputs.branch }}
+          sparse-checkout: |
+            ${{ github.event.inputs.manifest-path }}
+          sparse-checkout-cone-mode: false
 
       - name: Install manifest
         shell: powershell
         run: |
-          winget install --manifest ${{ github.event.inputs.manifest-path }} --accept-source-agreements --accept-package-agreements
+          winget validate --manifest "${{ github.event.inputs.manifest-path }}"
+          winget install --manifest "${{ github.event.inputs.manifest-path }}" --accept-source-agreements --accept-package-agreements
 
       - name: Verify installation
         shell: powershell
