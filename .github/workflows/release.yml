@@ -13,7 +13,15 @@ jobs:
     name: "Create Release"
     runs-on: windows-latest
     steps:
-      - uses: ClementTsang/winget-releaser@e1d9e728dae067da65723f9ca7f20a4495a69c83
+      - name: Enable Rust cache
+        uses: Swatinem/rust-cache@c19371144df3bb44fab255c43d04cbc2ab54d1c4 # 2.9.1
+        with:
+          cache-all-crates: false
+          cache-on-failure: true
+          cache-bin: true
+
+      - name: Run winget-releaser
+        uses: ClementTsang/winget-releaser@e1d9e728dae067da65723f9ca7f20a4495a69c83
         with:
           identifier: Clement.bottom
           installers-regex: '^bottom_.+_installer\.msi$' # Should catch both x86 and ARM
