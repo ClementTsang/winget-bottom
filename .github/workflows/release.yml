@@ -24,7 +24,7 @@ jobs:
           cache-bin: true
 
       - name: Run winget-releaser
-        uses: ClementTsang/winget-releaser@d9f6ae06fbcb150a37395d2e8477060e7fc3515b
+        uses: ClementTsang/winget-releaser@8fd76865f5ebae36f78a4884c642b9edf646ad26
         with:
           identifier: Clement.bottom
           installers-regex: '^bottom_.+_installer\.msi$' # Should catch both x86 and ARM
