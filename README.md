@@ -10,3 +10,5 @@ To use this:
 3. Run the release job.
 4. Check if a PR is created in [winget-pkgs](https://github.com/microsoft/winget-pkgs).
 5. When done, delete the PAT.
+
+Note that you may need to also manually sync up the forked `winget-pkgs` repo, as it is sometimes a bit wonky.
