@@ -7,8 +7,9 @@ To use this:
 
 1. Generate a classic PAT with public repo access.
 2. Update the secret token.
-3. Run the release job.
-4. Check if a PR is created in [winget-pkgs](https://github.com/microsoft/winget-pkgs).
-5. When done, delete the PAT.
+3. Make sure the `winget-pkgs` repo is up to date (otherwise the action may fail).
+4. Run the release job.
+5. Check if a PR is created in [winget-pkgs](https://github.com/microsoft/winget-pkgs).
+6. When done, delete the PAT.
 
 Note that you may need to also manually sync up the forked `winget-pkgs` repo, as it is sometimes a bit wonky.
